@@ -1,0 +1,19 @@
+
+server:
+  port: 9089
+spring:
+  application:
+    name: todo management v2
+  datasource:
+    url: jdbc:mysql://localhost:3306/todov2-pagination?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+    driverClassName: com.mysql.jdbc.Driver
+    username: root
+    password: furkan2023
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+
