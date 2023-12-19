@@ -8,7 +8,7 @@ spring:
     url: jdbc:mysql://localhost:3306/todov2-pagination?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
     driverClassName: com.mysql.jdbc.Driver
     username: root
-    password: furkan2023
+    password: omeR%50hajk
   jpa:
     hibernate:
       ddl-auto: update
