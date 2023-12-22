@@ -27,7 +27,7 @@ public class CityServiceImpl implements CityService {
     private final CountryService countryService;
 
     @Override
-    public CityDto createCountry(CityDto cityDto) {
+    public CityDto createCity(CityDto cityDto) {
         return CityMapper.toDto(repository.save(CityMapper.toEntity(new City(), cityDto)) , countryService);
     }
 
