@@ -1,7 +1,6 @@
 package com.kurtlar.konseyi.freelancerclone.domain.controller;
 
 import com.kurtlar.konseyi.freelancerclone.domain.controller.mapper.UniversityMapper;
-import com.kurtlar.konseyi.freelancerclone.domain.request.CountryRequest;
 import com.kurtlar.konseyi.freelancerclone.domain.request.UniversityRequest;
 import com.kurtlar.konseyi.freelancerclone.domain.response.UniversityResponse;
 import com.kurtlar.konseyi.freelancerclone.domain.service.UniversityService;
