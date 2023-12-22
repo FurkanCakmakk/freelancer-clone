@@ -1,7 +1,6 @@
 package com.kurtlar.konseyi.freelancerclone.library.rest;
 
 import jakarta.persistence.*;
-import lombok.Data;
 import lombok.Getter;
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.data.annotation.CreatedDate;
@@ -28,7 +27,7 @@ public abstract class AbstractEntity implements Serializable {
 
     @LastModifiedDate
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(nullable = false)
-    private Date updated;
+    @Column
+    private Date modified;
 
 }
