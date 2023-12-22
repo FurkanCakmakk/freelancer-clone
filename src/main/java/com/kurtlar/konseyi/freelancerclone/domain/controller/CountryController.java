@@ -46,12 +46,12 @@ public class CountryController extends BaseController {
     }
 
     @PutMapping("/{id}")
-    public Response<CountryResponse> updateTodo(@PathVariable String id, @RequestBody CountryRequest request) {
+    public Response<CountryResponse> updateCountry(@PathVariable String id, @RequestBody CountryRequest request) {
         return respond(CountryMapper.toResponse(countryService.update(id, CountryMapper.toDto(request))));
     }
 
     @DeleteMapping("/{id}")
-    public Response<Void> deleteTodoById(@PathVariable String id) {
+    public Response<Void> deleteCountryById(@PathVariable String id) {
         countryService.delete(id);
         return new Response<>(MetaResponse.success());
     }

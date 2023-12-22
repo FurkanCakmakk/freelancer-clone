@@ -20,7 +20,7 @@ public class UserController extends BaseController {
     private final UserService service;
 
     @PostMapping
-    public Response<UserResponse> createTodo(@RequestBody UserRequest request) {
+    public Response<UserResponse> createUser(@RequestBody UserRequest request) {
         return respond(UserMapper.toResponse(service.save(UserMapper.toDto(request))));
     }
 
@@ -31,7 +31,7 @@ public class UserController extends BaseController {
 
 
     @GetMapping("/get-all-with-page-and-sorting")
-    public Response<PageResponse<UserResponse>> getAllTodosByPaginationAndSortingWithQuery(
+    public Response<PageResponse<UserResponse>> getAllUsersByPaginationAndSortingWithQuery(
             @RequestParam(value = "pageNumber", defaultValue = Constants.DEFAULT_PAGE_NUMBER, required = false) String pageNumber,
             @RequestParam(value = "pageSize", defaultValue = Constants.DEFAULT_PAGE_SIZE, required = false) String pageSize,
             @RequestParam(value = "sortBy", defaultValue = Constants.DEFAULT_SORT_BY, required = false) String sortBy,
@@ -41,12 +41,12 @@ public class UserController extends BaseController {
     }
 
     @PutMapping("/{id}")
-    public Response<UserResponse> updateTodo(@PathVariable String id, @RequestBody UserRequest request) {
+    public Response<UserResponse> updateUser(@PathVariable String id, @RequestBody UserRequest request) {
         return respond(UserMapper.toResponse(service.update(id, UserMapper.toDto(request))));
     }
 
     @DeleteMapping("/{id}")
-    public Response<Void> deleteTodoById(@PathVariable String id) {
+    public Response<Void> deleteUserById(@PathVariable String id) {
         service.delete(id);
         return new Response<>(MetaResponse.success());
     }

@@ -18,17 +18,17 @@ public class CityController extends BaseController {
     private final CityService cityService;
 
     @PostMapping
-    public Response<CityResponse> createCountry(@RequestBody CityRequest request) {
-        return respond(CityMapper.toResponse(cityService.createCountry(CityMapper.toDto(request))));
+    public Response<CityResponse> createCity(@RequestBody CityRequest request) {
+        return respond(CityMapper.toResponse(cityService.createCity(CityMapper.toDto(request))));
     }
 
     @GetMapping("/{id}")
-    public Response<CityResponse> getCountryById(@PathVariable String id) {
+    public Response<CityResponse> getCityById(@PathVariable String id) {
         return respond(CityMapper.toResponse(cityService.getById(id)));
     }
 
     @GetMapping("/get-all-with-page-and-sorting")
-    public Response<PageResponse<CityResponse>> getAllCountriesByPaginationAndSortingWithQuery(
+    public Response<PageResponse<CityResponse>> getAllCitiesByPaginationAndSortingWithQuery(
             @RequestParam(value = "pageNumber", defaultValue = Constants.DEFAULT_PAGE_NUMBER, required = false) String pageNumber,
             @RequestParam(value = "pageSize", defaultValue = Constants.DEFAULT_PAGE_SIZE, required = false) String pageSize,
             @RequestParam(value = "sortBy", defaultValue = Constants.DEFAULT_SORT_BY, required = false) String sortBy,
@@ -38,17 +38,17 @@ public class CityController extends BaseController {
     }
 
     @GetMapping
-    public Response<DataResponse<CityResponse>> getAllCountries(){
+    public Response<DataResponse<CityResponse>> getAllCities(){
         return respond(cityService.getAll().stream().map(CityMapper::toResponse).collect(Collectors.toList()));
     }
 
     @PutMapping("/{id}")
-    public Response<CityResponse> updateTodo(@PathVariable String id, @RequestBody CityRequest request) {
+    public Response<CityResponse> updateCity(@PathVariable String id, @RequestBody CityRequest request) {
         return respond(CityMapper.toResponse(cityService.update(id, CityMapper.toDto(request))));
     }
 
     @DeleteMapping("/{id}")
-    public Response<Void> deleteTodoById(@PathVariable String id) {
+    public Response<Void> deleteCityById(@PathVariable String id) {
         cityService.delete(id);
         return new Response<>(MetaResponse.success());
     }
