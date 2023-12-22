@@ -5,10 +5,10 @@ spring:
   application:
     name: todo management v2
   datasource:
-    url: jdbc:mysql://localhost:3306/todov2-pagination?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+    url: jdbc:mysql://localhost:3306/freelancer-clone?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
     driverClassName: com.mysql.jdbc.Driver
     username: root
-    password:
+    password: furkan2023
   jpa:
     hibernate:
       ddl-auto: update
