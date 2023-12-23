@@ -4,13 +4,12 @@ import com.kurtlar.konseyi.freelancerclone.domain.controller.mapper.UserMapper;
 import com.kurtlar.konseyi.freelancerclone.domain.request.UserRequest;
 import com.kurtlar.konseyi.freelancerclone.domain.response.UserResponse;
 import com.kurtlar.konseyi.freelancerclone.domain.service.UserService;
-import com.kurtlar.konseyi.freelancerclone.library.rest.BaseController;
-import com.kurtlar.konseyi.freelancerclone.library.rest.MetaResponse;
-import com.kurtlar.konseyi.freelancerclone.library.rest.PageResponse;
-import com.kurtlar.konseyi.freelancerclone.library.rest.Response;
+import com.kurtlar.konseyi.freelancerclone.library.rest.*;
 import com.kurtlar.konseyi.freelancerclone.library.utils.Constants;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("users")
@@ -38,6 +37,11 @@ public class UserController extends BaseController {
             @RequestParam(value = "sortDir" , defaultValue = Constants.DEFAULT_SORT_DIRECTION , required = false) String sortDir
     ) {
         return respond(service.getAll(pageNumber , pageSize,sortBy , sortDir).map(dto -> UserMapper.toResponse(dto)));
+    }
+
+    @GetMapping
+    public Response<DataResponse<UserResponse>> getAllUsers(){
+        return respond(service.getAll().stream().map(UserMapper::toResponse).collect(Collectors.toList()));
     }
 
     @PutMapping("/{id}")
