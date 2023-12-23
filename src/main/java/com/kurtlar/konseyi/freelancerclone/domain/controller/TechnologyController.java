@@ -30,7 +30,7 @@ public class TechnologyController extends BaseController {
     public Response<DataResponse<TechnologyResponse>> getAllTechnologies(){
         return respond(service.getAll()
                 .stream()
-                .map(technologyDto -> TechnologyMapper.toResponse(technologyDto))
+                .map(TechnologyMapper::toResponse)
                 .collect(Collectors.toList()));
     }
 
