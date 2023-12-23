@@ -2,14 +2,23 @@ package com.kurtlar.konseyi.freelancerclone.domain.service.mapper;
 
 
 import com.kurtlar.konseyi.freelancerclone.domain.dto.JobDto;
+import com.kurtlar.konseyi.freelancerclone.domain.dto.TechnologyDto;
 import com.kurtlar.konseyi.freelancerclone.domain.entity.Job;
+import com.kurtlar.konseyi.freelancerclone.domain.service.TechnologyService;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class JobMapper {
 
     public JobMapper(){}
 
-    public static JobDto toDto(Job job){
+    public static JobDto toDto(Job job, TechnologyService technologyService){
+
         return JobDto.builder()
+                .id(job.getId())
+                .created(job.getCreated())
+                .modified(job.getModified())
                 .name(job.getName())
                 .description(job.getDescription())
                 .salary(job.getSalary())
@@ -18,7 +27,10 @@ public class JobMapper {
                 .workerId(job.getWorkerId())
                 .ownerId(job.getOwnerId())
                 .status(job.getStatus())
-                .technologies(job.getTechnologies())
+                .technologies(job.getTechnologies()
+                        .stream()
+                        .map(technologyService::getById)
+                        .toList())
                 .offers(job.getOffers())
                 .build();
     }
@@ -33,7 +45,10 @@ public class JobMapper {
         job.setOwnerId(dto.getOwnerId());
         job.setWorkerId(dto.getWorkerId());
         job.setOffers(dto.getOffers());
-        job.setTechnologies(dto.getTechnologies());
+        job.setTechnologies(dto.getTechnologies()
+                .stream()
+                .map(TechnologyDto::getId)
+                .toList());
         return job;
     }
 }

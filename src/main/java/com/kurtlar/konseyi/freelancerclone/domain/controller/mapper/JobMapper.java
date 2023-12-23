@@ -1,8 +1,13 @@
 package com.kurtlar.konseyi.freelancerclone.domain.controller.mapper;
 
 import com.kurtlar.konseyi.freelancerclone.domain.dto.JobDto;
+import com.kurtlar.konseyi.freelancerclone.domain.dto.TechnologyDto;
 import com.kurtlar.konseyi.freelancerclone.domain.request.JobRequest;
 import com.kurtlar.konseyi.freelancerclone.domain.response.JobResponse;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class JobMapper {
 
@@ -18,7 +23,11 @@ public class JobMapper {
                 .workerId(request.getWorkerId())
                 .ownerId(request.getOwnerId())
                 .status(request.getStatus())
-                .technologies(request.getTechnologies())
+                .technologies(request.getTechnologies()
+                        .stream()
+                        .map(technology -> TechnologyDto.builder()
+                                .id(technology)
+                                .build()).toList())
                 .build();
     }
 
@@ -35,8 +44,8 @@ public class JobMapper {
                 .workerId(job.getWorkerId())
                 .ownerId(job.getOwnerId())
                 .status(job.getStatus())
-                .offers(job.getOffers())
                 .technologies(job.getTechnologies())
+                .offers(job.getOffers())
                 .build();
     }
 

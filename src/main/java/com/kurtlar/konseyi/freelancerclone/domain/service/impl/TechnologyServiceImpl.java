@@ -2,7 +2,6 @@ package com.kurtlar.konseyi.freelancerclone.domain.service.impl;
 
 import com.kurtlar.konseyi.freelancerclone.domain.dto.TechnologyDto;
 import com.kurtlar.konseyi.freelancerclone.domain.entity.Technology;
-import com.kurtlar.konseyi.freelancerclone.domain.entity.User;
 import com.kurtlar.konseyi.freelancerclone.domain.repository.TechnologyRepository;
 import com.kurtlar.konseyi.freelancerclone.domain.service.TechnologyService;
 import com.kurtlar.konseyi.freelancerclone.domain.service.mapper.TechnologyMapper;
@@ -28,7 +27,7 @@ public class TechnologyServiceImpl implements TechnologyService {
     @Override
     public TechnologyDto getById(String technologyId) {
         return repository.findById(technologyId).map(TechnologyMapper::toDto).orElseThrow(
-                () -> new ResourceNotFoundException(User.class.getSimpleName(), "id", technologyId)
+                () -> new ResourceNotFoundException(Technology.class.getSimpleName(), "id", technologyId)
         );
     }
 
@@ -52,7 +51,7 @@ public class TechnologyServiceImpl implements TechnologyService {
     public List<TechnologyDto> getAll() {
         return repository.findAll()
                 .stream()
-                .map(technology -> TechnologyMapper.toDto(technology))
+                .map(TechnologyMapper::toDto)
                 .collect(Collectors.toList());
     }
 }

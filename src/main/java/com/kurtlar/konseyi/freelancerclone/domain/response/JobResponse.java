@@ -1,5 +1,6 @@
 package com.kurtlar.konseyi.freelancerclone.domain.response;
 
+import com.kurtlar.konseyi.freelancerclone.domain.dto.TechnologyDto;
 import lombok.*;
 
 import java.util.Date;
@@ -22,6 +23,6 @@ public class JobResponse {
     private String workerId;
     private String ownerId;
     private Boolean status;
-    private List<String> technologies;
+    private List<TechnologyDto> technologies;
     private List<String> offers;
 }

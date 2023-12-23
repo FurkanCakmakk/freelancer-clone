@@ -20,5 +20,4 @@ public class JobRequest {
     private String ownerId;
     private Boolean status;
     private List<String> technologies;
-    private List<String> offers;
 }

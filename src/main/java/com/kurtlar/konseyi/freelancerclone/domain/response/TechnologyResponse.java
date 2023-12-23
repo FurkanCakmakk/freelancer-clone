@@ -3,7 +3,6 @@ package com.kurtlar.konseyi.freelancerclone.domain.response;
 import lombok.*;
 
 import java.util.Date;
-import java.util.List;
 
 @Setter
 @Getter

@@ -22,6 +22,6 @@ public class JobDto {
     private String workerId;
     private String ownerId;
     private Boolean status;
-    private List<String> technologies;
+    private List<TechnologyDto> technologies;
     private List<String> offers;
 }
