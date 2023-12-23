@@ -1,9 +1,8 @@
-
 server:
   port: 9089
 spring:
   application:
-    name: todo management v2
+    name: freelance-clone
   datasource:
     url: jdbc:mysql://localhost:3306/freelancer-clone?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
     driverClassName: com.mysql.jdbc.Driver
@@ -17,3 +16,8 @@ spring:
       hibernate:
         format_sql: true
 
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'

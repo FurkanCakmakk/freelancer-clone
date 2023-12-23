@@ -7,11 +7,11 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class CountryDto {
+public class UniversityDto {
     private String id;
     private String name;
+    private CountryDto country;
+    private CityDto city;
 
-    public CountryDto(String id){
-        this.id = id;
-    }
+
 }

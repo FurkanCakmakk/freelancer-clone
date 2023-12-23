@@ -5,6 +5,7 @@ import com.kurtlar.konseyi.freelancerclone.domain.entity.Country;
 import com.kurtlar.konseyi.freelancerclone.domain.repository.CountryRepository;
 import com.kurtlar.konseyi.freelancerclone.domain.service.CountryService;
 import com.kurtlar.konseyi.freelancerclone.domain.service.mapper.CountryMapper;
+import com.kurtlar.konseyi.freelancerclone.library.exception.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -27,18 +28,25 @@ public class CountryServiceImpl implements CountryService {
 
     @Override
     public CountryDto getById(String id) {
-        return CountryMapper.toDto(repository.findById(id).orElse(null));
+        return CountryMapper.toDto(repository.findById(id).orElseThrow(
+                () -> new ResourceNotFoundException(Country.class.getSimpleName(), "id", id)
+        ));
     }
 
     @Override
     public CountryDto update(String id, CountryDto countryDto) {
-        Country country = repository.findById(id).orElse(null);
+        Country country = repository.findById(id).orElseThrow(
+                () -> new ResourceNotFoundException(Country.class.getSimpleName(), "id", id)
+        );
         return CountryMapper.toDto(repository.save(setCountry(country, countryDto)));
     }
 
     @Override
     public void delete(String id) {
-        var country = repository.findById(id).orElse(null);
+        var country = repository.findById(id).orElseThrow(
+                () -> new ResourceNotFoundException(Country.class.getSimpleName(), "id", id)
+
+        );
         repository.delete(country);
     }
 

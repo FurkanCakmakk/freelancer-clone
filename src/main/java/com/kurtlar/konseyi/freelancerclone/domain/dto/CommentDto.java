@@ -7,11 +7,10 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class CountryDto {
+public class CommentDto {
     private String id;
-    private String name;
-
-    public CountryDto(String id){
-        this.id = id;
-    }
+    private UserDto reviewer;
+    private UserDto reviewed;
+    private String content;
+    private int rating;
 }
