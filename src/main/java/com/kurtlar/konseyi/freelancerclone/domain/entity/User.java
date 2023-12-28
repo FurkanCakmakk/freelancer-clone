@@ -1,15 +1,14 @@
 package com.kurtlar.konseyi.freelancerclone.domain.entity;
 
 import com.kurtlar.konseyi.freelancerclone.library.rest.AbstractEntity;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EntityListeners;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
+import java.util.Set;
 
 @Entity
 @Table(name = User.TABLE)
@@ -25,6 +24,7 @@ public class User extends AbstractEntity {
     private static final String COL_SURNAME = "surname";
     private static final String COL_EMAIL = "email";
     private static final String COL_PASSWORD = "password";
+    private static final String COL_ROLES = "roles";
 
     @Column(name = COL_NAME)
     private String name;
@@ -40,6 +40,12 @@ public class User extends AbstractEntity {
 
     @Column(name = COL_PASSWORD)
     private String password;
+
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinTable(name = "user_roles",
+            joinColumns = @JoinColumn(name = "user_id" , referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id" , referencedColumnName = "id"))
+    private Set<Role> roles;
 
 
 }
