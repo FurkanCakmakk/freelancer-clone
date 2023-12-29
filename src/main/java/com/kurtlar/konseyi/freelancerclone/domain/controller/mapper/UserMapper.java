@@ -3,6 +3,8 @@ package com.kurtlar.konseyi.freelancerclone.domain.controller.mapper;
 import com.kurtlar.konseyi.freelancerclone.domain.dto.UserDto;
 import com.kurtlar.konseyi.freelancerclone.domain.request.UserRequest;
 import com.kurtlar.konseyi.freelancerclone.domain.response.UserResponse;
+import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 public class UserMapper {
 

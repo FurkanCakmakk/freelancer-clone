@@ -3,17 +3,18 @@ package com.kurtlar.konseyi.freelancerclone.domain.service.impl;
 import com.kurtlar.konseyi.freelancerclone.domain.dto.JobDto;
 import com.kurtlar.konseyi.freelancerclone.domain.dto.TechnologyDto;
 import com.kurtlar.konseyi.freelancerclone.domain.entity.Job;
-import com.kurtlar.konseyi.freelancerclone.domain.entity.User;
 import com.kurtlar.konseyi.freelancerclone.domain.repository.JobRepository;
 import com.kurtlar.konseyi.freelancerclone.domain.service.JobService;
 import com.kurtlar.konseyi.freelancerclone.domain.service.TechnologyService;
 import com.kurtlar.konseyi.freelancerclone.domain.service.mapper.JobMapper;
 import com.kurtlar.konseyi.freelancerclone.library.exception.ResourceNotFoundException;
+import com.kurtlar.konseyi.freelancerclone.library.utils.CreateSort;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -51,19 +52,21 @@ public class JobServiceImpl implements JobService {
     }
 
     @Override
-    public List<JobDto> getAllJobsByOwner(String ownerId) {
-        return repository.findAllByOwnerId(ownerId)
-                .stream()
-                .map(job -> JobMapper.toDto(job,technologyService))
-                .collect(Collectors.toList());
+    public Page<JobDto> getAllJobsByOwner(String ownerId , String pageNumber, String pageSize , String  sortBy , String sortDir) {
+        Sort sort = CreateSort.generateSort(sortBy, sortDir);
+
+        Pageable pageable = PageRequest.of(Integer.parseInt(pageNumber), Integer.parseInt(pageSize), sort);
+
+        return repository.findAll(pageable).map(job -> JobMapper.toDto(job,technologyService));
     }
 
     @Override
-    public List<JobDto> getAllJobsByWorker(String workerId) {
-        return repository.findAllByWorkerId(workerId)
-                .stream()
-                .map(job -> JobMapper.toDto(job,technologyService))
-                .collect(Collectors.toList());
+    public Page<JobDto> getAllJobsByWorker(String workerId , String pageNumber, String pageSize , String  sortBy , String sortDir) {
+        Sort sort = CreateSort.generateSort(sortBy, sortDir);
+
+        Pageable pageable = PageRequest.of(Integer.parseInt(pageNumber), Integer.parseInt(pageSize), sort);
+
+        return repository.findAll(pageable).map(job -> JobMapper.toDto(job,technologyService));
     }
 
 

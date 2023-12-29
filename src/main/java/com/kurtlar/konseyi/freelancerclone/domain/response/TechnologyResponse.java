@@ -11,7 +11,5 @@ import java.util.Date;
 @Builder
 public class TechnologyResponse {
     private String id;
-    private Date created;
-    private Date modified;
     private String name;
 }

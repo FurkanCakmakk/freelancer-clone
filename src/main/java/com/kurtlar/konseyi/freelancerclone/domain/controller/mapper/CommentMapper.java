@@ -21,6 +21,8 @@ public class CommentMapper {
 
     public static CommentResponse toResponse(CommentDto dto){
         return CommentResponse.builder()
+                .created(dto.getCreated())
+                .modified(dto.getModified())
                 .id(dto.getId())
                 .reviewer(dto.getReviewer())
                 .reviewed(dto.getReviewed())

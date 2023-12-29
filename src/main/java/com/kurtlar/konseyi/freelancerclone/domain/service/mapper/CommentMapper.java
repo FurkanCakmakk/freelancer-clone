@@ -14,6 +14,8 @@ public class CommentMapper {
                 .rating(comment.getRating())
                 .reviewed(userService.getById(comment.getReviewedId()))
                 .reviewer(userService.getById(comment.getReviewerId()))
+                .created(comment.getCreated())
+                .modified(comment.getModified())
                 .build();
     }
 

@@ -11,12 +11,12 @@ public class OfferMapper {
     public static OfferDto toDto(Offer offer, UserService userService, JobService jobService){
         return OfferDto.builder()
                 .id(offer.getId())
-                .created(offer.getCreated())
-                .modified(offer.getModified())
                 .job(jobService.getById(offer.getJobId()))
                 .user(userService.getById(offer.getUserId()))
                 .message(offer.getMessage())
                 .wage(offer.getWage())
+                .created(offer.getCreated())
+                .modified(offer.getModified())
                 .build();
     }
 

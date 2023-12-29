@@ -1,5 +1,6 @@
 package com.kurtlar.konseyi.freelancerclone.domain.entity;
 
+import com.kurtlar.konseyi.freelancerclone.library.enums.JobStatus;
 import com.kurtlar.konseyi.freelancerclone.library.rest.AbstractEntity;
 import jakarta.persistence.*;
 import lombok.*;
@@ -35,7 +36,7 @@ public class Job extends AbstractEntity {
     private String description;
 
     @Column(name = COL_SALARY)
-    private String salary;
+    private double salary;
 
     @Column(name = COL_START_DATE)
     private Date startDate;
@@ -50,7 +51,7 @@ public class Job extends AbstractEntity {
     private String ownerId;
 
     @Column(name = COL_STATUS)
-    private Boolean status;
+    private JobStatus status;
 
     @Column(name = COL_TECHNOLOGIES)
     @ElementCollection(fetch = FetchType.EAGER)

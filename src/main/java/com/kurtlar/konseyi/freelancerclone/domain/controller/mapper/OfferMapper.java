@@ -21,12 +21,12 @@ public class OfferMapper {
     public static OfferResponse toResponse(OfferDto offer){
         return OfferResponse.builder()
                 .id(offer.getId())
-                .created(offer.getCreated())
-                .modified(offer.getModified())
                 .job(offer.getJob())
                 .user(offer.getUser())
                 .message(offer.getMessage())
                 .wage(offer.getWage())
+                .created(offer.getCreated())
+                .modified(offer.getModified())
                 .build();
     }
 }
