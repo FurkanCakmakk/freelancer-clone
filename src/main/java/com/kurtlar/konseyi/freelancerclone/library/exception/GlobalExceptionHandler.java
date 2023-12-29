@@ -14,4 +14,10 @@ public class GlobalExceptionHandler extends BaseController {
         return respond(MetaResponse.of(MessageCodes.ENTITY_NOT_FOUND.getCode(), ex.getMessage()));
     }
 
+    @ExceptionHandler(EntityAlreadyExistsException.class)
+    public Response<MetaResponse> handleEntityAlreadyExistsException(EntityAlreadyExistsException ex){
+        return respond(MetaResponse.of(MessageCodes.ENTITY_NOT_FOUND.getCode(), ex.getMessage()));
+    }
+
+
 }

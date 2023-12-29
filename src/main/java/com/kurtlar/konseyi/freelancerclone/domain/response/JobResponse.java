@@ -7,7 +7,6 @@ import lombok.*;
 
 import java.util.Date;
 import java.util.List;
-import java.util.Set;
 
 @Setter
 @Getter
@@ -27,4 +26,5 @@ public class JobResponse {
     private String ownerId;
     private JobStatus status;
     private List<TechnologyDto> technologies;
+    private List<OfferDto> offers;
 }

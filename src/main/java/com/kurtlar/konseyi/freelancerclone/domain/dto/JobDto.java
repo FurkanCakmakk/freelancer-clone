@@ -24,7 +24,7 @@ public class JobDto {
     private String ownerId;
     private JobStatus status;
     private List<TechnologyDto> technologies;
-    private Set<OfferDto> offers;
+    private List<OfferDto> offers;
     private Date created;
     private Date modified;
 }

@@ -2,16 +2,11 @@ package com.kurtlar.konseyi.freelancerclone.domain.service.mapper;
 
 
 import com.kurtlar.konseyi.freelancerclone.domain.dto.JobDto;
-import com.kurtlar.konseyi.freelancerclone.domain.dto.OfferDto;
 import com.kurtlar.konseyi.freelancerclone.domain.dto.TechnologyDto;
 import com.kurtlar.konseyi.freelancerclone.domain.entity.Job;
-import com.kurtlar.konseyi.freelancerclone.domain.entity.Offer;
 import com.kurtlar.konseyi.freelancerclone.domain.service.OfferService;
 import com.kurtlar.konseyi.freelancerclone.domain.service.TechnologyService;
-import lombok.RequiredArgsConstructor;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.stream.Collectors;
 
 
@@ -36,7 +31,7 @@ public class JobMapper {
                         .collect(Collectors.toList()))
                 .created(job.getCreated())
                 .modified(job.getModified())
-                .offers(job.getOffers().stream().map(offer-> offerService.getById(offer.getId())).collect(Collectors.toSet()))
+                .offers(offerService.getAllOffersByJob(job.getId()).stream().collect(Collectors.toList()))
                 .build();
     }
 
