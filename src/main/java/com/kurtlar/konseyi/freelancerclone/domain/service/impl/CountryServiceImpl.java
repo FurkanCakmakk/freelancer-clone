@@ -6,7 +6,7 @@ import com.kurtlar.konseyi.freelancerclone.domain.repository.CountryRepository;
 import com.kurtlar.konseyi.freelancerclone.domain.service.CountryService;
 import com.kurtlar.konseyi.freelancerclone.domain.service.mapper.CountryMapper;
 import com.kurtlar.konseyi.freelancerclone.library.exception.ResourceNotFoundException;
-import com.kurtlar.konseyi.freelancerclone.library.utils.GenerateSort;
+import com.kurtlar.konseyi.freelancerclone.library.utils.CreateSort;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -58,7 +58,7 @@ public class CountryServiceImpl implements CountryService {
 
     @Override
     public Page<CountryDto> getAll(String pageNumber, String pageSize, String sortBy, String sortDir) {
-        Sort sort = GenerateSort.createSort(sortBy, sortDir);
+        Sort sort = CreateSort.generateSort(sortBy, sortDir);
 
         Pageable pageable = PageRequest.of(Integer.parseInt(pageNumber), Integer.parseInt(pageSize), sort);
 
