@@ -2,7 +2,7 @@ package com.kurtlar.konseyi.freelancerclone.library.enums;
 
 public enum JobStatus {
     STATUS_OPEN,
-    STATUS_FINISHED,
-    STATUS_CLOSED,
+    STATUS_IN_PROGRESS,
+    STATUS_FINISHED;
 
 }

@@ -6,13 +6,14 @@ import lombok.*;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 @Setter
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class JobDto extends AbstractEntity {
+public class JobDto {
     private String id;
     private String name;
     private String description;
@@ -23,7 +24,7 @@ public class JobDto extends AbstractEntity {
     private String ownerId;
     private JobStatus status;
     private List<TechnologyDto> technologies;
-    private List<String> offers;
+    private Set<OfferDto> offers;
     private Date created;
     private Date modified;
 }

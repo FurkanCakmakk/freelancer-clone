@@ -1,6 +1,7 @@
 package com.kurtlar.konseyi.freelancerclone.domain.service.impl;
 
 import com.kurtlar.konseyi.freelancerclone.domain.dto.OfferDto;
+import com.kurtlar.konseyi.freelancerclone.domain.entity.Job;
 import com.kurtlar.konseyi.freelancerclone.domain.entity.Offer;
 import com.kurtlar.konseyi.freelancerclone.domain.repository.OfferRepository;
 import com.kurtlar.konseyi.freelancerclone.domain.service.JobService;
@@ -12,6 +13,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
@@ -19,18 +21,18 @@ import java.util.stream.Collectors;
 public class OfferServiceImpl implements OfferService {
 
     private final OfferRepository repository;
-    private final JobService jobService;
     private final UserService userService;
 
     @Override
     public OfferDto save(OfferDto offer) {
         Offer newOffer = repository.save(OfferMapper.toEntity(new Offer(), offer));
-        return OfferMapper.toDto(newOffer,userService,jobService);
+
+        return OfferMapper.toDto(newOffer, userService);
     }
 
     @Override
     public OfferDto getById(String offerId) {
-        return repository.findById(offerId).map(offer ->  OfferMapper.toDto(offer,userService,jobService)).orElseThrow(
+        return repository.findById(offerId).map(offer -> OfferMapper.toDto(offer, userService)).orElseThrow(
                 () -> new ResourceNotFoundException(Offer.class.getSimpleName(), "id", offerId)
         );
     }
@@ -40,7 +42,7 @@ public class OfferServiceImpl implements OfferService {
         Offer oldOffer = repository.findById(offerId).orElseThrow(
                 () -> new ResourceNotFoundException(Offer.class.getSimpleName(), "id", offerId)
         );
-        return OfferMapper.toDto(repository.save(setOffer(oldOffer,offer)),userService,jobService);
+        return OfferMapper.toDto(repository.save(setOffer(oldOffer, offer)), userService);
     }
 
     @Override
@@ -51,19 +53,21 @@ public class OfferServiceImpl implements OfferService {
     }
 
     @Override
-    public List<OfferDto> getAllOffersByJob(String jobId) {
-        return repository.findAll()
+    public Set<OfferDto> getAllOffersByJob(String jobId) {
+        return repository.findAllByJobId(jobId)
                 .stream()
-                .map(offer -> OfferMapper.toDto(offer,userService,jobService))
-                .collect(Collectors.toList());
+                .map(offer -> OfferMapper.toDto(offer, userService))
+                .collect(Collectors.toSet());
     }
 
     @Override
     public List<OfferDto> getAllOffersByUser(String userId) {
-        return null;
+        return repository.findAllByUserId(userId).stream()
+                .map(offer -> OfferMapper.toDto(offer, userService))
+                .collect(Collectors.toList());
     }
 
-    public Offer setOffer(Offer offer, OfferDto offerDto){
+    public Offer setOffer(Offer offer, OfferDto offerDto) {
         offer.setWage(offerDto.getWage());
         offer.setMessage(offerDto.getMessage());
         return offer;

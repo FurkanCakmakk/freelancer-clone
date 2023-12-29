@@ -1,6 +1,7 @@
 package com.kurtlar.konseyi.freelancerclone.domain.controller.mapper;
 
 import com.kurtlar.konseyi.freelancerclone.domain.dto.JobDto;
+import com.kurtlar.konseyi.freelancerclone.domain.dto.OfferDto;
 import com.kurtlar.konseyi.freelancerclone.domain.dto.TechnologyDto;
 import com.kurtlar.konseyi.freelancerclone.domain.request.JobRequest;
 import com.kurtlar.konseyi.freelancerclone.domain.response.JobResponse;
@@ -45,7 +46,6 @@ public class JobMapper {
                 .ownerId(job.getOwnerId())
                 .status(job.getStatus())
                 .technologies(job.getTechnologies())
-                .offers(job.getOffers())
                 .created(job.getCreated())
                 .modified(job.getModified())
                 .build();

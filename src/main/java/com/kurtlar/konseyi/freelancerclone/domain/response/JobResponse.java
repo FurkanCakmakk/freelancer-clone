@@ -1,11 +1,13 @@
 package com.kurtlar.konseyi.freelancerclone.domain.response;
 
+import com.kurtlar.konseyi.freelancerclone.domain.dto.OfferDto;
 import com.kurtlar.konseyi.freelancerclone.domain.dto.TechnologyDto;
 import com.kurtlar.konseyi.freelancerclone.library.enums.JobStatus;
 import lombok.*;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 @Setter
 @Getter
@@ -25,5 +27,4 @@ public class JobResponse {
     private String ownerId;
     private JobStatus status;
     private List<TechnologyDto> technologies;
-    private List<String> offers;
 }

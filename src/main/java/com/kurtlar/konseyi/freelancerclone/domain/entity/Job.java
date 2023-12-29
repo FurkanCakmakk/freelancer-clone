@@ -8,6 +8,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = Job.TABLE)
@@ -27,7 +28,6 @@ public class Job extends AbstractEntity {
     private static final String COL_OWNER_ID = "owner_id";
     private static final String COL_STATUS = "status";
     private static final String COL_TECHNOLOGIES = "technologies";
-    private static final String COL_OFFERS = "offers";
 
     @Column(name = COL_NAME)
     private String name;
@@ -56,8 +56,4 @@ public class Job extends AbstractEntity {
     @Column(name = COL_TECHNOLOGIES)
     @ElementCollection(fetch = FetchType.EAGER)
     private List<String> technologies;
-
-    @Column(name = COL_OFFERS)
-    @ElementCollection(fetch = FetchType.EAGER)
-    private List<String> offers;
 }
