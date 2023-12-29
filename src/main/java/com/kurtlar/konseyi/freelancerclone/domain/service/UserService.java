@@ -17,4 +17,6 @@ public interface UserService {
     List<UserDto> getAll();
 
     Page<UserDto> getAll(String pageNumber, String pageSize , String  sortBy , String sortDir);
+
+
 }

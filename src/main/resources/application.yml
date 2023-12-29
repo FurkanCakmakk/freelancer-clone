@@ -1,3 +1,6 @@
+jwt:
+  secret: 2b8629ac53be1a14aea0fd005d89b881435bb6f03be963b26868f8403af6e5bf
+  expirationMs: 604800000
 server:
   port: 9089
 spring:

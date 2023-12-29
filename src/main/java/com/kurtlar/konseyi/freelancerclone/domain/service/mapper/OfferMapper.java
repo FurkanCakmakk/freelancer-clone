@@ -8,21 +8,21 @@ import com.kurtlar.konseyi.freelancerclone.domain.service.UserService;
 public class OfferMapper {
     public OfferMapper(){}
 
-    public static OfferDto toDto(Offer offer, UserService userService, JobService jobService){
+    public static OfferDto toDto(Offer offer, UserService userService){
         return OfferDto.builder()
                 .id(offer.getId())
-                .created(offer.getCreated())
-                .modified(offer.getModified())
-                .job(jobService.getById(offer.getJobId()))
+                .jobId(offer.getJobId())
                 .user(userService.getById(offer.getUserId()))
                 .message(offer.getMessage())
                 .wage(offer.getWage())
+                .created(offer.getCreated())
+                .modified(offer.getModified())
                 .build();
     }
 
     public static Offer toEntity(Offer offer, OfferDto offerDto){
         offer.setUserId(offerDto.getUser().getId());
-        offer.setJobId(offerDto.getJob().getId());
+        offer.setJobId(offerDto.getJobId());
         offer.setMessage(offerDto.getMessage());
         offer.setWage(offerDto.getWage());
         return offer;

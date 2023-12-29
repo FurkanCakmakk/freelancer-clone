@@ -2,6 +2,8 @@ package com.kurtlar.konseyi.freelancerclone.domain.dto;
 
 import lombok.*;
 
+import java.util.Date;
+
 @Setter
 @Getter
 @NoArgsConstructor
@@ -13,4 +15,6 @@ public class CommentDto {
     private UserDto reviewed;
     private String content;
     private int rating;
+    private Date created;
+    private Date modified;
 }

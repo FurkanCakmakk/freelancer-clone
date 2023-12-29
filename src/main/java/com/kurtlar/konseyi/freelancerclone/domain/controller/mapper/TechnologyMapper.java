@@ -18,8 +18,6 @@ public class TechnologyMapper {
     public static TechnologyResponse toResponse(TechnologyDto dto){
         return TechnologyResponse.builder()
                 .id(dto.getId())
-                .created(dto.getCreated())
-                .modified(dto.getModified())
                 .name(dto.getName())
                 .build();
     }

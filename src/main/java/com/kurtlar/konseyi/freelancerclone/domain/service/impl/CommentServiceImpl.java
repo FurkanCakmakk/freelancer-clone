@@ -7,6 +7,8 @@ import com.kurtlar.konseyi.freelancerclone.domain.service.CommentService;
 import com.kurtlar.konseyi.freelancerclone.domain.service.UserService;
 import com.kurtlar.konseyi.freelancerclone.domain.service.mapper.CommentMapper;
 import com.kurtlar.konseyi.freelancerclone.library.exception.ResourceNotFoundException;
+import com.kurtlar.konseyi.freelancerclone.library.utils.CreatePageable;
+import com.kurtlar.konseyi.freelancerclone.library.utils.CreateSort;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -54,17 +56,22 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     public List<CommentDto> getAllByReviewerId(String reviewerId, String pageNumber, String pageSize, String sortBy, String sortDir) {
-        return repository.findAll().stream().map(comment -> CommentMapper.toDto(comment, userService)).toList();
+        Sort sort = CreateSort.generateSort(sortBy, sortDir);
+        Pageable pageable = CreatePageable.createPageable(pageNumber, pageSize, sort);
+
+        return repository.getAllByReviewerId(reviewerId , pageable).stream().map(comment -> CommentMapper.toDto(comment, userService)).toList();
     }
 
 
     @Override
     public Page<CommentDto> getAllByReviewedId(String reviewedId, String pageNumber, String pageSize, String sortBy, String sortDir) {
-        Sort sort = sortDir.equalsIgnoreCase(Sort.Direction.ASC.name()) ? Sort.by(sortBy).ascending() : Sort.by(sortBy).descending();
+        System.out.println("Servisteki getAllByReviewedId metoduna girdi");
+        Sort sort = CreateSort.generateSort(sortBy, sortDir);
+        System.out.println("Sort nesnesi oluşturuldu");
+        Pageable pageable = CreatePageable.createPageable(pageNumber, pageSize, sort);
+        System.out.println("Page nesnesi oluşturuldu");
 
-        Pageable pageable = PageRequest.of(Integer.parseInt(pageNumber), Integer.parseInt(pageSize), sort);
-
-        return repository.findAll(pageable).map(comment -> CommentMapper.toDto(comment, userService));
+        return repository.getAllByReviewedId(reviewedId,pageable).map(comment -> CommentMapper.toDto(comment, userService));
     }
 
     private Comment setComment(Comment comment, CommentDto commentDto) {

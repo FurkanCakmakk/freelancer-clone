@@ -11,7 +11,7 @@ public class OfferMapper {
 
     public static OfferDto toDto(OfferRequest request){
         return OfferDto.builder()
-                .job(JobDto.builder().id(request.getJobId()).build())
+                .jobId(request.getJobId())
                 .user(UserDto.builder().id(request.getUserId()).build())
                 .message(request.getMessage())
                 .wage(request.getWage())
@@ -21,12 +21,12 @@ public class OfferMapper {
     public static OfferResponse toResponse(OfferDto offer){
         return OfferResponse.builder()
                 .id(offer.getId())
-                .created(offer.getCreated())
-                .modified(offer.getModified())
-                .job(offer.getJob())
+                .jobId(offer.getJobId())
                 .user(offer.getUser())
                 .message(offer.getMessage())
                 .wage(offer.getWage())
+                .created(offer.getCreated())
+                .modified(offer.getModified())
                 .build();
     }
 }

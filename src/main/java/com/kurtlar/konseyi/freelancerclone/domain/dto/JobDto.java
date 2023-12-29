@@ -1,9 +1,12 @@
 package com.kurtlar.konseyi.freelancerclone.domain.dto;
 
+import com.kurtlar.konseyi.freelancerclone.library.enums.JobStatus;
+import com.kurtlar.konseyi.freelancerclone.library.rest.AbstractEntity;
 import lombok.*;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 @Setter
 @Getter
@@ -12,16 +15,16 @@ import java.util.List;
 @Builder
 public class JobDto {
     private String id;
-    private Date created;
-    private Date modified;
     private String name;
     private String description;
-    private String salary;
+    private double salary;
     private Date startDate;
     private Date endDate;
     private String workerId;
     private String ownerId;
-    private Boolean status;
+    private JobStatus status;
     private List<TechnologyDto> technologies;
-    private List<String> offers;
+    private Set<OfferDto> offers;
+    private Date created;
+    private Date modified;
 }
