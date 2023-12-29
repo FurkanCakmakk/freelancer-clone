@@ -15,6 +15,7 @@ public class JobMapper {
     }
 
     public static JobDto toDto(JobRequest request) {
+        List<TechnologyDto> technologies = new ArrayList<>();
         return JobDto.builder()
                 .name(request.getName())
                 .description(request.getDescription())
@@ -28,7 +29,7 @@ public class JobMapper {
                         .stream()
                         .map(technology -> TechnologyDto.builder()
                                 .id(technology)
-                                .build()).toList())
+                                .build()).collect(Collectors.toList()))
                 .build();
     }
 

@@ -8,6 +8,7 @@ import com.kurtlar.konseyi.freelancerclone.domain.service.TechnologyService;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class JobMapper {
 
@@ -27,7 +28,7 @@ public class JobMapper {
                 .technologies(job.getTechnologies()
                         .stream()
                         .map(technologyService::getById)
-                        .toList())
+                        .collect(Collectors.toList()))
                 .offers(job.getOffers())
                 .created(job.getCreated())
                 .modified(job.getModified())
@@ -47,7 +48,7 @@ public class JobMapper {
         job.setTechnologies(dto.getTechnologies()
                 .stream()
                 .map(TechnologyDto::getId)
-                .toList());
+                .collect(Collectors.toList()));
         return job;
     }
 }

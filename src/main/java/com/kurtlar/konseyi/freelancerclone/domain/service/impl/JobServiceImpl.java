@@ -16,6 +16,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.util.stream.Collectors;
+
 @Service
 @RequiredArgsConstructor
 public class JobServiceImpl implements JobService {
@@ -77,13 +79,9 @@ public class JobServiceImpl implements JobService {
         job.setDescription(jobDto.getDescription());
         job.setSalary(jobDto.getSalary());
         job.setStatus(jobDto.getStatus());
-        job.setOwnerId(jobDto.getOwnerId());
         job.setWorkerId(jobDto.getWorkerId());
         job.setOffers(jobDto.getOffers());
-        job.setTechnologies(jobDto.getTechnologies()
-                .stream()
-                .map(TechnologyDto::getId)
-                .toList());
+        job.setTechnologies(jobDto.getTechnologies().stream().map(technologyDto ->technologyDto.getId()).collect(Collectors.toList()));
         return job;
     }
 }
