@@ -1,13 +1,11 @@
 package com.kurtlar.konseyi.freelancerclone.domain.service.impl;
 
 import com.kurtlar.konseyi.freelancerclone.domain.dto.OfferDto;
-import com.kurtlar.konseyi.freelancerclone.domain.entity.Job;
 import com.kurtlar.konseyi.freelancerclone.domain.entity.Offer;
 import com.kurtlar.konseyi.freelancerclone.domain.repository.OfferRepository;
-import com.kurtlar.konseyi.freelancerclone.domain.service.JobService;
 import com.kurtlar.konseyi.freelancerclone.domain.service.OfferService;
-import com.kurtlar.konseyi.freelancerclone.domain.service.UserService;
 import com.kurtlar.konseyi.freelancerclone.domain.service.mapper.OfferMapper;
+import com.kurtlar.konseyi.freelancerclone.library.exception.EntityAlreadyExistsException;
 import com.kurtlar.konseyi.freelancerclone.library.exception.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -21,18 +19,19 @@ import java.util.stream.Collectors;
 public class OfferServiceImpl implements OfferService {
 
     private final OfferRepository repository;
-    private final UserService userService;
 
     @Override
     public OfferDto save(OfferDto offer) {
+        if (repository.findByUserIdAndJobId(offer.getUserId(),offer.getJobId())){
+            throw new EntityAlreadyExistsException(Offer.class.getSimpleName(), "id", offer.getId());
+        }
         Offer newOffer = repository.save(OfferMapper.toEntity(new Offer(), offer));
-
-        return OfferMapper.toDto(newOffer, userService);
+        return OfferMapper.toDto(newOffer);
     }
 
     @Override
     public OfferDto getById(String offerId) {
-        return repository.findById(offerId).map(offer -> OfferMapper.toDto(offer, userService)).orElseThrow(
+        return repository.findById(offerId).map(offer -> OfferMapper.toDto(offer)).orElseThrow(
                 () -> new ResourceNotFoundException(Offer.class.getSimpleName(), "id", offerId)
         );
     }
@@ -42,7 +41,7 @@ public class OfferServiceImpl implements OfferService {
         Offer oldOffer = repository.findById(offerId).orElseThrow(
                 () -> new ResourceNotFoundException(Offer.class.getSimpleName(), "id", offerId)
         );
-        return OfferMapper.toDto(repository.save(setOffer(oldOffer, offer)), userService);
+        return OfferMapper.toDto(repository.save(setOffer(oldOffer, offer)));
     }
 
     @Override
@@ -56,14 +55,14 @@ public class OfferServiceImpl implements OfferService {
     public Set<OfferDto> getAllOffersByJob(String jobId) {
         return repository.findAllByJobId(jobId)
                 .stream()
-                .map(offer -> OfferMapper.toDto(offer, userService))
+                .map(offer -> OfferMapper.toDto(offer))
                 .collect(Collectors.toSet());
     }
 
     @Override
     public List<OfferDto> getAllOffersByUser(String userId) {
         return repository.findAllByUserId(userId).stream()
-                .map(offer -> OfferMapper.toDto(offer, userService))
+                .map(offer -> OfferMapper.toDto(offer))
                 .collect(Collectors.toList());
     }
 

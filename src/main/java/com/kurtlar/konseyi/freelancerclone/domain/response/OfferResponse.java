@@ -1,7 +1,5 @@
 package com.kurtlar.konseyi.freelancerclone.domain.response;
 
-import com.kurtlar.konseyi.freelancerclone.domain.dto.JobDto;
-import com.kurtlar.konseyi.freelancerclone.domain.dto.UserDto;
 import lombok.*;
 
 import java.util.Date;
@@ -15,7 +13,7 @@ public class OfferResponse {
     private String id;
     private Date created;
     private Date modified;
-    private UserDto user;
+    private String userId;
     private String  jobId;
     private String message;
     private Double wage;
