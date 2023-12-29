@@ -1,5 +1,7 @@
 package com.kurtlar.konseyi.freelancerclone.domain.dto;
 
+import com.kurtlar.konseyi.freelancerclone.library.enums.JobStatus;
+import com.kurtlar.konseyi.freelancerclone.library.rest.AbstractEntity;
 import lombok.*;
 
 import java.util.Date;
@@ -10,10 +12,8 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class JobDto {
+public class JobDto extends AbstractEntity {
     private String id;
-    private Date created;
-    private Date modified;
     private String name;
     private String description;
     private String salary;
@@ -21,7 +21,9 @@ public class JobDto {
     private Date endDate;
     private String workerId;
     private String ownerId;
-    private Boolean status;
+    private JobStatus status;
     private List<TechnologyDto> technologies;
     private List<String> offers;
+    private Date created;
+    private Date modified;
 }

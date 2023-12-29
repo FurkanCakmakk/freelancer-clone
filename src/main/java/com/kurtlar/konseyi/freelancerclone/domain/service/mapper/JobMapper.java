@@ -14,11 +14,8 @@ public class JobMapper {
     public JobMapper(){}
 
     public static JobDto toDto(Job job, TechnologyService technologyService){
-
         return JobDto.builder()
                 .id(job.getId())
-                .created(job.getCreated())
-                .modified(job.getModified())
                 .name(job.getName())
                 .description(job.getDescription())
                 .salary(job.getSalary())
@@ -32,6 +29,8 @@ public class JobMapper {
                         .map(technologyService::getById)
                         .toList())
                 .offers(job.getOffers())
+                .created(job.getCreated())
+                .modified(job.getModified())
                 .build();
     }
 

@@ -1,5 +1,6 @@
 package com.kurtlar.konseyi.freelancerclone.domain.request;
 
+import com.kurtlar.konseyi.freelancerclone.library.enums.JobStatus;
 import lombok.*;
 
 import java.util.Date;
@@ -18,6 +19,6 @@ public class JobRequest {
     private Date endDate;
     private String workerId;
     private String ownerId;
-    private Boolean status;
+    private JobStatus status;
     private List<String> technologies;
 }

@@ -11,9 +11,10 @@ import java.util.stream.Collectors;
 
 public class JobMapper {
 
-    public JobMapper(){}
+    public JobMapper() {
+    }
 
-    public static JobDto toDto(JobRequest request){
+    public static JobDto toDto(JobRequest request) {
         return JobDto.builder()
                 .name(request.getName())
                 .description(request.getDescription())
@@ -31,11 +32,9 @@ public class JobMapper {
                 .build();
     }
 
-    public static JobResponse toResponse(JobDto job){
+    public static JobResponse toResponse(JobDto job) {
         return JobResponse.builder()
                 .id(job.getId())
-                .created(job.getCreated())
-                .modified(job.getModified())
                 .name(job.getName())
                 .description(job.getDescription())
                 .salary(job.getSalary())
@@ -46,6 +45,8 @@ public class JobMapper {
                 .status(job.getStatus())
                 .technologies(job.getTechnologies())
                 .offers(job.getOffers())
+                .created(job.getCreated())
+                .modified(job.getModified())
                 .build();
     }
 
