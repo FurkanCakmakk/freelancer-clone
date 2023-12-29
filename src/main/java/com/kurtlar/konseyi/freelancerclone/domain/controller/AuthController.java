@@ -1,7 +1,9 @@
 package com.kurtlar.konseyi.freelancerclone.domain.controller;
 
+import com.kurtlar.konseyi.freelancerclone.domain.controller.mapper.AuthMapper;
 import com.kurtlar.konseyi.freelancerclone.domain.controller.mapper.UserMapper;
 import com.kurtlar.konseyi.freelancerclone.domain.dto.LoginDto;
+import com.kurtlar.konseyi.freelancerclone.domain.request.LoginRequest;
 import com.kurtlar.konseyi.freelancerclone.domain.request.UserRequest;
 import com.kurtlar.konseyi.freelancerclone.domain.response.AuthResponse;
 import com.kurtlar.konseyi.freelancerclone.domain.service.AuthService;
@@ -20,15 +22,10 @@ public class AuthController extends BaseController {
     private final AuthService authService;
 
     @PostMapping(value = {"/login" , "/signin"})
-    public Response<AuthResponse> login(@RequestBody LoginDto loginDto) {
-        System.out.println("Logine GİRDİ");
-        String token = authService.login(loginDto);
-        System.out.println("token = " + token);
+    public Response<AuthResponse> login(@RequestBody LoginRequest loginRequest) {
+        String token = authService.login(AuthMapper.toDto(loginRequest));
         AuthResponse jwtAuthResponse = new AuthResponse();
-        System.out.println("jwtAuthResponse = " + jwtAuthResponse);
         jwtAuthResponse.setAccessToken(token);
-        System.out.println("setAcces token yapıldı");
-
         return respond(jwtAuthResponse);
     }
 
