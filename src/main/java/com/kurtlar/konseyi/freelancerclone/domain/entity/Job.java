@@ -36,7 +36,7 @@ public class Job extends AbstractEntity {
     private String description;
 
     @Column(name = COL_SALARY)
-    private String salary;
+    private double salary;
 
     @Column(name = COL_START_DATE)
     private Date startDate;

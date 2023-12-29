@@ -18,7 +18,7 @@ public class JobResponse {
     private Date modified;
     private String name;
     private String description;
-    private String salary;
+    private double salary;
     private Date startDate;
     private Date endDate;
     private String workerId;
