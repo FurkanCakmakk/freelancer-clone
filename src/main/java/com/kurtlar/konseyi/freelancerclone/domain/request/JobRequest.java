@@ -1,10 +1,12 @@
 package com.kurtlar.konseyi.freelancerclone.domain.request;
 
+import com.kurtlar.konseyi.freelancerclone.domain.dto.OfferDto;
 import com.kurtlar.konseyi.freelancerclone.library.enums.JobStatus;
 import lombok.*;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 @Setter
 @Getter

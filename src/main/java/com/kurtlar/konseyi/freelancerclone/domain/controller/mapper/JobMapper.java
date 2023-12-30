@@ -5,8 +5,6 @@ import com.kurtlar.konseyi.freelancerclone.domain.dto.TechnologyDto;
 import com.kurtlar.konseyi.freelancerclone.domain.request.JobRequest;
 import com.kurtlar.konseyi.freelancerclone.domain.response.JobResponse;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.stream.Collectors;
 
 public class JobMapper {
@@ -28,7 +26,7 @@ public class JobMapper {
                         .stream()
                         .map(technology -> TechnologyDto.builder()
                                 .id(technology)
-                                .build()).toList())
+                                .build()).collect(Collectors.toList()))
                 .build();
     }
 

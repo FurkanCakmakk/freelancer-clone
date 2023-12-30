@@ -4,16 +4,17 @@ package com.kurtlar.konseyi.freelancerclone.domain.service.mapper;
 import com.kurtlar.konseyi.freelancerclone.domain.dto.JobDto;
 import com.kurtlar.konseyi.freelancerclone.domain.dto.TechnologyDto;
 import com.kurtlar.konseyi.freelancerclone.domain.entity.Job;
+import com.kurtlar.konseyi.freelancerclone.domain.service.OfferService;
 import com.kurtlar.konseyi.freelancerclone.domain.service.TechnologyService;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.stream.Collectors;
+
 
 public class JobMapper {
+    public JobMapper() {
+    }
 
-    public JobMapper(){}
-
-    public static JobDto toDto(Job job, TechnologyService technologyService){
+    public static JobDto toDto(Job job, TechnologyService technologyService, OfferService offerService) {
         return JobDto.builder()
                 .id(job.getId())
                 .name(job.getName())
@@ -27,14 +28,14 @@ public class JobMapper {
                 .technologies(job.getTechnologies()
                         .stream()
                         .map(technologyService::getById)
-                        .toList())
-                .offers(job.getOffers())
+                        .collect(Collectors.toList()))
                 .created(job.getCreated())
                 .modified(job.getModified())
+                .offers(offerService.getAllOffersByJob(job.getId()).stream().collect(Collectors.toList()))
                 .build();
     }
 
-    public static Job toEntity(Job job,JobDto dto){
+    public static Job toEntity(Job job, JobDto dto) {
         job.setName(dto.getName());
         job.setDescription(dto.getDescription());
         job.setSalary(dto.getSalary());
@@ -43,11 +44,10 @@ public class JobMapper {
         job.setEndDate(dto.getEndDate());
         job.setOwnerId(dto.getOwnerId());
         job.setWorkerId(dto.getWorkerId());
-        job.setOffers(dto.getOffers());
         job.setTechnologies(dto.getTechnologies()
                 .stream()
                 .map(TechnologyDto::getId)
-                .toList());
+                .collect(Collectors.toList()));
         return job;
     }
 }

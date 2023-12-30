@@ -36,4 +36,5 @@ public class Offer extends AbstractEntity {
 
     @Column(name = COL_WAGE)
     private Double wage;
+
 }

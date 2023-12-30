@@ -13,8 +13,8 @@ public class OfferDto {
     private String id;
     private Date created;
     private Date modified;
-    private UserDto user;
-    private JobDto job;
+    private String userId;
+    private String jobId;
     private String message;
     private Double wage;
 }

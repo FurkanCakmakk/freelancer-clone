@@ -2,17 +2,15 @@ package com.kurtlar.konseyi.freelancerclone.domain.service.mapper;
 
 import com.kurtlar.konseyi.freelancerclone.domain.dto.OfferDto;
 import com.kurtlar.konseyi.freelancerclone.domain.entity.Offer;
-import com.kurtlar.konseyi.freelancerclone.domain.service.JobService;
-import com.kurtlar.konseyi.freelancerclone.domain.service.UserService;
 
 public class OfferMapper {
     public OfferMapper(){}
 
-    public static OfferDto toDto(Offer offer, UserService userService, JobService jobService){
+    public static OfferDto toDto(Offer offer){
         return OfferDto.builder()
                 .id(offer.getId())
-                .job(jobService.getById(offer.getJobId()))
-                .user(userService.getById(offer.getUserId()))
+                .jobId(offer.getJobId())
+                .userId(offer.getUserId())
                 .message(offer.getMessage())
                 .wage(offer.getWage())
                 .created(offer.getCreated())
@@ -21,8 +19,8 @@ public class OfferMapper {
     }
 
     public static Offer toEntity(Offer offer, OfferDto offerDto){
-        offer.setUserId(offerDto.getUser().getId());
-        offer.setJobId(offerDto.getJob().getId());
+        offer.setUserId(offerDto.getUserId());
+        offer.setJobId(offerDto.getJobId());
         offer.setMessage(offerDto.getMessage());
         offer.setWage(offerDto.getWage());
         return offer;

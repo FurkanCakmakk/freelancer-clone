@@ -18,6 +18,8 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("jobs")
 @RequiredArgsConstructor
+@CrossOrigin
+
 public class JobController extends BaseController {
 
     private final JobService service;
@@ -25,6 +27,16 @@ public class JobController extends BaseController {
     @GetMapping("/{id}")
     public Response<JobResponse> getJobById(@PathVariable String id) {
         return respond(JobMapper.toResponse(service.getById(id)));
+    }
+
+    @GetMapping
+    public Response<PageResponse<JobResponse>> getAllJobs(
+            @RequestParam(value = "pageNumber", defaultValue = Constants.DEFAULT_PAGE_NUMBER, required = false) String pageNumber,
+            @RequestParam(value = "pageSize", defaultValue = Constants.DEFAULT_PAGE_SIZE, required = false) String pageSize,
+            @RequestParam(value = "sortBy", defaultValue = Constants.DEFAULT_SORT_BY, required = false) String sortBy,
+            @RequestParam(value = "sortDir", defaultValue = Constants.DEFAULT_SORT_DIRECTION, required = false) String sortDir
+    ){
+        return respond(service.getAllJobs(pageNumber, pageSize, sortBy, sortDir).map(JobMapper::toResponse));
     }
 
     @GetMapping("/jobs/owner/{ownerId}")

@@ -15,6 +15,8 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("comments")
 @RequiredArgsConstructor
+@CrossOrigin
+
 public class CommentController extends BaseController {
     private final CommentService commentService;
 
