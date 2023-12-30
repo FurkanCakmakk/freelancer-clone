@@ -14,6 +14,8 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("users")
 @RequiredArgsConstructor
+@CrossOrigin
+
 public class UserController extends BaseController {
 
     private final UserService service;

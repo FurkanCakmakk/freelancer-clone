@@ -17,6 +17,8 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("technologies")
 @RequiredArgsConstructor
+@CrossOrigin
+
 public class TechnologyController extends BaseController {
 
     private final TechnologyService service;

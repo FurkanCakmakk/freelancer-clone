@@ -18,6 +18,8 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("jobs")
 @RequiredArgsConstructor
+@CrossOrigin
+
 public class JobController extends BaseController {
 
     private final JobService service;

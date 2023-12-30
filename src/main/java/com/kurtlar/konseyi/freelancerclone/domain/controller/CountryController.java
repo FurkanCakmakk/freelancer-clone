@@ -17,6 +17,8 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("countries")
 @RequiredArgsConstructor
+@CrossOrigin
+
 public class CountryController extends BaseController {
     private final CountryService countryService;
 

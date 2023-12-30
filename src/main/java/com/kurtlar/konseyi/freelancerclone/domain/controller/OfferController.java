@@ -16,6 +16,8 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("offers")
 @RequiredArgsConstructor
+@CrossOrigin
+
 public class OfferController extends BaseController {
     private final OfferService service;
 
