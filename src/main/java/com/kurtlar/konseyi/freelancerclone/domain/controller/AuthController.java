@@ -10,14 +10,13 @@ import com.kurtlar.konseyi.freelancerclone.domain.service.AuthService;
 import com.kurtlar.konseyi.freelancerclone.library.rest.BaseController;
 import com.kurtlar.konseyi.freelancerclone.library.rest.Response;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/auth")
 @RequiredArgsConstructor
+@CrossOrigin
+
 public class AuthController extends BaseController {
     private final AuthService authService;
 

@@ -14,6 +14,7 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("cities")
 @RequiredArgsConstructor
+@CrossOrigin
 public class CityController extends BaseController {
     private final CityService cityService;
 
