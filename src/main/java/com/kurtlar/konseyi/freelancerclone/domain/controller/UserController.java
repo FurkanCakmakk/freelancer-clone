@@ -7,6 +7,7 @@ import com.kurtlar.konseyi.freelancerclone.domain.service.UserService;
 import com.kurtlar.konseyi.freelancerclone.library.rest.*;
 import com.kurtlar.konseyi.freelancerclone.library.utils.Constants;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.stream.Collectors;
@@ -21,11 +22,13 @@ public class UserController extends BaseController {
     private final UserService service;
 
     @PostMapping
+    @PreAuthorize("hasRole('SUPER_ADMIN' )")
     public Response<UserResponse> createUser(@RequestBody UserRequest request) {
         return respond(UserMapper.toResponse(service.save(UserMapper.toDto(request))));
     }
 
     @GetMapping("/{id}")
+
     public Response<UserResponse> getUserById(@PathVariable String id) {
         return respond(UserMapper.toResponse(service.getById(id)));
     }
