@@ -10,5 +10,5 @@ import java.util.Optional;
 public interface OfferRepository extends JpaRepository<Offer, String> {
     List<Offer> findAllByUserId(String userId);
     List<Offer> findAllByJobId(String jobId);
-    Boolean findByUserIdAndJobId(String userId, String jobId);
+    Offer findByUserIdAndJobId(String userId, String jobId);
 }

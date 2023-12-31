@@ -34,13 +34,13 @@ public class OfferController extends BaseController {
         return respond(OfferMapper.toResponse(service.getById(id)));
     }
 
-    @GetMapping("{jobId}")
+    @GetMapping("/job/{jobId}")
     @PreAuthorize("hasAnyRole('ADMIN' , 'SUPER_ADMIN' , 'USER')")
     public Response<DataResponse<OfferResponse>> getAllOffersByJob(@PathVariable String jobId) {
         return respond(service.getAllOffersByJob(jobId).stream().map(OfferMapper::toResponse).collect(Collectors.toList()));
     }
 
-    @GetMapping("{userId}")
+    @GetMapping("/user/{userId}")
     @PreAuthorize("hasAnyRole('ADMIN' , 'SUPER_ADMIN' , 'USER')")
     public Response<DataResponse<OfferResponse>> getAllOffersByUser(@PathVariable String userId) {
         return respond(service.getAllOffersByUser(userId).stream().map(OfferMapper::toResponse).collect(Collectors.toList()));

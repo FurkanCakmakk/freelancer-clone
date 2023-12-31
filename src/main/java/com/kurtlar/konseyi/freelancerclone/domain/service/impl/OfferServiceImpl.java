@@ -22,8 +22,9 @@ public class OfferServiceImpl implements OfferService {
 
     @Override
     public OfferDto save(OfferDto offer) {
-        if (repository.findByUserIdAndJobId(offer.getUserId(),offer.getJobId())){
-            throw new EntityAlreadyExistsException(Offer.class.getSimpleName(), "id", offer.getId());
+        var isExist = repository.findByUserIdAndJobId(offer.getUserId(),offer.getJobId());
+        if (isExist != null){
+            throw new EntityAlreadyExistsException(Offer.class.getSimpleName(), "id", isExist.getId());
         }
         Offer newOffer = repository.save(OfferMapper.toEntity(new Offer(), offer));
         return OfferMapper.toDto(newOffer);
