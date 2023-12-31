@@ -56,7 +56,7 @@ public class SecurityConfig {
 //                .authorizeHttpRequests(x -> x.requestMatchers(HttpMethod.POST, "/privates/**").hasRole("SUPER_ADMIN"))
 //                .authorizeHttpRequests(x -> x.requestMatchers(HttpMethod.DELETE, "/privates/**").hasRole("SUPER_ADMIN"))
 //                .authorizeHttpRequests(x -> x.anyRequest().authenticated())
-                .authorizeHttpRequests(x -> x.anyRequest().permitAll())
+                .authorizeHttpRequests(x -> x.anyRequest().authenticated())
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
                 .exceptionHandling(exception -> exception.authenticationEntryPoint(jwtAuthenticationEntryPoint))
                 .sessionManagement(x -> x.sessionCreationPolicy(SessionCreationPolicy.STATELESS))

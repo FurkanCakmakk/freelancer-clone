@@ -8,6 +8,7 @@ import com.kurtlar.konseyi.freelancerclone.domain.service.CommentService;
 import com.kurtlar.konseyi.freelancerclone.library.rest.*;
 import com.kurtlar.konseyi.freelancerclone.library.utils.Constants;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.stream.Collectors;
@@ -21,16 +22,19 @@ public class CommentController extends BaseController {
     private final CommentService commentService;
 
     @PostMapping
+    @PreAuthorize("hasAnyRole('ADMIN' , 'SUPER_ADMIN' , 'USER')")
     public Response<CommentResponse> createComment(@RequestBody CommentRequest request) {
         return respond(CommentMapper.toResponse(commentService.create(CommentMapper.toDto(request))));
     }
 
     @GetMapping("/{id}")
+    @PreAuthorize("hasAnyRole('ADMIN' , 'SUPER_ADMIN' , 'USER')")
     public Response<CommentResponse> getCommentById(@PathVariable String id) {
         return respond(CommentMapper.toResponse(commentService.getById(id)));
     }
 
     @GetMapping("/get-all-reviewed/{reviewedId}")
+    @PreAuthorize("hasAnyRole('ADMIN' , 'SUPER_ADMIN' , 'USER')")
     public Response<PageResponse<CommentResponse>> getAllCommentsByReviewed(
             @PathVariable String reviewedId,
             @RequestParam(value = "pageNumber", defaultValue = Constants.DEFAULT_PAGE_NUMBER, required = false) String pageNumber,
@@ -42,6 +46,7 @@ public class CommentController extends BaseController {
     }
 
     @GetMapping("/get-all-reviewer/{reviewerId}")
+    @PreAuthorize("hasAnyRole('ADMIN' , 'SUPER_ADMIN' , 'USER')")
     public Response<DataResponse<CommentResponse>> getAllCommentsByReviewer(
             @PathVariable String reviewerId,
             @RequestParam(value = "pageNumber", defaultValue = Constants.DEFAULT_PAGE_NUMBER, required = false) String pageNumber,
@@ -53,11 +58,13 @@ public class CommentController extends BaseController {
     }
 
     @PutMapping("/{id}")
+    @PreAuthorize("hasAnyRole('ADMIN' , 'SUPER_ADMIN' , 'USER')")
     public Response<CommentResponse> updateComment(@PathVariable String id, @RequestBody CommentRequest request) {
         return respond(CommentMapper.toResponse(commentService.update(id, CommentMapper.toDto(request))));
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAnyRole('ADMIN' , 'SUPER_ADMIN' , 'USER')")
     public Response<Void> deleteCommentById(@PathVariable String id) {
         commentService.delete(id);
         return new Response<>(MetaResponse.success());
