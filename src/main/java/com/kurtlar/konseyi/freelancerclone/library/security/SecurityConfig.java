@@ -46,6 +46,8 @@ public class SecurityConfig {
                 .headers(x -> x.frameOptions(HeadersConfigurer.FrameOptionsConfig::disable))
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(x -> x.requestMatchers("/auth/login").permitAll())
+                .authorizeHttpRequests(x -> x.requestMatchers("/auth/register").permitAll())
+                .authorizeHttpRequests(x -> x.requestMatchers("/auth/**").permitAll())
 //                .authorizeHttpRequests(x -> x.requestMatchers("/auth/register").permitAll())
 //                .authorizeHttpRequests(x -> x.requestMatchers(HttpMethod.DELETE, "/comments/**").authenticated())
 //                .authorizeHttpRequests(x -> x.requestMatchers(HttpMethod.POST, "/comments/**").authenticated())

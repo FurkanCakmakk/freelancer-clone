@@ -1,5 +1,6 @@
 package com.kurtlar.konseyi.freelancerclone.domain.request;
 
+import com.kurtlar.konseyi.freelancerclone.library.enums.JobStatus;
 import com.kurtlar.konseyi.freelancerclone.library.rest.AbstractEntity;
 import lombok.*;
 
@@ -15,4 +16,5 @@ public class OfferRequest {
     private String jobId;
     private String message;
     private Double wage;
+    private JobStatus status;
 }

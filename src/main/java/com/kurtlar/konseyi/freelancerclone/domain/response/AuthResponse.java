@@ -12,4 +12,6 @@ import lombok.Setter;
 public class AuthResponse {
     private String accessToken;
     private String tokenType = "Bearer";
+    private int role;
+    private String userId;
 }

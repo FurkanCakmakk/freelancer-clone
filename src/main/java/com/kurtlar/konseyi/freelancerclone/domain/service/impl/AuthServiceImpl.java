@@ -6,7 +6,9 @@ import com.kurtlar.konseyi.freelancerclone.domain.entity.Role;
 import com.kurtlar.konseyi.freelancerclone.domain.entity.User;
 import com.kurtlar.konseyi.freelancerclone.domain.repository.RoleRepository;
 import com.kurtlar.konseyi.freelancerclone.domain.repository.UserRepository;
+import com.kurtlar.konseyi.freelancerclone.domain.response.AuthResponse;
 import com.kurtlar.konseyi.freelancerclone.domain.service.AuthService;
+import com.kurtlar.konseyi.freelancerclone.library.exception.ResourceNotFoundException;
 import com.kurtlar.konseyi.freelancerclone.library.security.JwtTokenProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -31,16 +33,26 @@ public class AuthServiceImpl implements AuthService {
     private final JwtTokenProvider jwtTokenProvider;
 
     @Override
-    public String login(LoginDto loginDto) {
+    public AuthResponse login(LoginDto loginDto) {
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
                 loginDto.getUsernameOrEmail(),
                 loginDto.getPassword())
         );
-
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
+        User user = userRepository.findByUsernameOrEmail(loginDto.getUsernameOrEmail(), loginDto.getUsernameOrEmail()).orElseThrow(
+                () -> new ResourceNotFoundException("User", "username or email", loginDto.getUsernameOrEmail())
+        );
+
         String token = jwtTokenProvider.generateJwtToken(authentication);
-        return token;
+
+        AuthResponse authResponse = new AuthResponse();
+        authResponse.setRole(user.getRoles().stream().map(role -> role.getId()).findFirst().orElse(1));
+        authResponse.setAccessToken(token);
+        authResponse.setUserId(user.getId());
+
+
+        return authResponse;
     }
 
     @Override
