@@ -1,5 +1,6 @@
 package com.kurtlar.konseyi.freelancerclone.domain.dto;
 
+import com.kurtlar.konseyi.freelancerclone.library.enums.JobStatus;
 import lombok.*;
 
 import java.util.Date;
@@ -17,4 +18,5 @@ public class OfferDto {
     private String jobId;
     private String message;
     private Double wage;
+    private JobStatus status;
 }

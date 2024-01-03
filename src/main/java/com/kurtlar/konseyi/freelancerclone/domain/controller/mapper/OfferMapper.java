@@ -13,6 +13,7 @@ public class OfferMapper {
                 .userId(request.getUserId())
                 .message(request.getMessage())
                 .wage(request.getWage())
+                .status(request.getStatus())
                 .build();
     }
 
@@ -25,6 +26,7 @@ public class OfferMapper {
                 .wage(offer.getWage())
                 .created(offer.getCreated())
                 .modified(offer.getModified())
+                .status(offer.getStatus())
                 .build();
     }
 }

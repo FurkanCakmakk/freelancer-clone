@@ -16,19 +16,15 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/auth")
 @RequiredArgsConstructor
 @CrossOrigin
-
 public class AuthController extends BaseController {
     private final AuthService authService;
 
-    @PostMapping(value = {"/login" , "/signin"})
+    @PostMapping(value = {"/login", "/signin"})
     public Response<AuthResponse> login(@RequestBody LoginRequest loginRequest) {
-        String token = authService.login(AuthMapper.toDto(loginRequest));
-        AuthResponse jwtAuthResponse = new AuthResponse();
-        jwtAuthResponse.setAccessToken(token);
-        return respond(jwtAuthResponse);
+        return respond(authService.login(AuthMapper.toDto(loginRequest)));
     }
 
-    @PostMapping(value = {"/register" , "/signup"})
+    @PostMapping(value = {"/register", "/signup"})
     public Response<String> register(@RequestBody UserRequest registerRequest) {
         return respond(authService.register(UserMapper.toDto(registerRequest)));
     }
