@@ -1,5 +1,6 @@
 package com.kurtlar.konseyi.freelancerclone.library.rest;
 
+import com.kurtlar.konseyi.freelancerclone.domain.response.TcDogrulaResponse;
 import org.springframework.data.domain.Page;
 
 import java.util.List;
@@ -16,6 +17,8 @@ public class ResponseBuilder {
     public static <T> Response<T> build(T item) {
         return new Response<>(item);
     }
+
+
 
     public static <T> Response<MetaResponse> build(MetaResponse metaResponse){
         return new Response<>(metaResponse);

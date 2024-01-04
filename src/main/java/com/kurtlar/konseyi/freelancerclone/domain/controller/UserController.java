@@ -1,7 +1,9 @@
 package com.kurtlar.konseyi.freelancerclone.domain.controller;
 
 import com.kurtlar.konseyi.freelancerclone.domain.controller.mapper.UserMapper;
+import com.kurtlar.konseyi.freelancerclone.domain.request.TcDogrulaRequest;
 import com.kurtlar.konseyi.freelancerclone.domain.request.UserRequest;
+import com.kurtlar.konseyi.freelancerclone.domain.response.TcDogrulaResponse;
 import com.kurtlar.konseyi.freelancerclone.domain.response.UserResponse;
 import com.kurtlar.konseyi.freelancerclone.domain.service.UserService;
 import com.kurtlar.konseyi.freelancerclone.library.rest.*;
@@ -21,6 +23,10 @@ public class UserController extends BaseController {
 
     private final UserService service;
 
+    @PostMapping("/validate")
+    public TcDogrulaResponse validateUser(@RequestBody TcDogrulaRequest tcDogrulaRequest){
+        return service.validateUser(tcDogrulaRequest);
+    }
     @PostMapping
     @PreAuthorize("hasRole('SUPER_ADMIN' )")
     public Response<UserResponse> createUser(@RequestBody UserRequest request) {

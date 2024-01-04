@@ -1,6 +1,8 @@
 package com.kurtlar.konseyi.freelancerclone.domain.service;
 
 import com.kurtlar.konseyi.freelancerclone.domain.dto.UserDto;
+import com.kurtlar.konseyi.freelancerclone.domain.request.TcDogrulaRequest;
+import com.kurtlar.konseyi.freelancerclone.domain.response.TcDogrulaResponse;
 import org.springframework.data.domain.Page;
 
 import java.util.List;
@@ -17,6 +19,8 @@ public interface UserService {
     List<UserDto> getAll();
 
     Page<UserDto> getAll(String pageNumber, String pageSize , String  sortBy , String sortDir);
+
+    TcDogrulaResponse validateUser(TcDogrulaRequest tcDogrulaRequest);
 
 
 }
