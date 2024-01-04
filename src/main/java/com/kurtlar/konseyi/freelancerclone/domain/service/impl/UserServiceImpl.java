@@ -3,13 +3,11 @@ package com.kurtlar.konseyi.freelancerclone.domain.service.impl;
 import com.kurtlar.konseyi.freelancerclone.domain.dto.UserDto;
 import com.kurtlar.konseyi.freelancerclone.domain.entity.User;
 import com.kurtlar.konseyi.freelancerclone.domain.repository.UserRepository;
-import com.kurtlar.konseyi.freelancerclone.domain.request.TcDogrulaRequest;
 import com.kurtlar.konseyi.freelancerclone.domain.response.TcDogrulaResponse;
 import com.kurtlar.konseyi.freelancerclone.domain.service.UserService;
 import com.kurtlar.konseyi.freelancerclone.domain.service.mapper.UserMapper;
 import com.kurtlar.konseyi.freelancerclone.library.exception.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
-import org.apache.tomcat.util.json.JSONParser;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -18,11 +16,8 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.http.converter.json.JsonbHttpMessageConverter;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
@@ -36,14 +31,16 @@ public class UserServiceImpl implements UserService {
 
     private final RestTemplate restTemplate;
 
-    private final String REST_URL = "http://localhost:3000";
+    private static final String BASE_URL = "http://localhost:3000";
 
-    public TcDogrulaResponse validateUser(TcDogrulaRequest tcDogrulaRequest) {
-
-        ResponseEntity<TcDogrulaResponse> responseEntity = restTemplate.postForEntity(REST_URL, tcDogrulaRequest, TcDogrulaResponse.class);
-        return responseEntity.getBody();
-
+    public TcDogrulaResponse validateUser(String TCKimlikNo, String Ad, String Soyad, String DogumYili) {
+        String REST_URL = BASE_URL + "/" + TCKimlikNo + "/" + Ad + "/" + Soyad + "/" + DogumYili;
+        System.out.println("REST_URL  : " + REST_URL);
+        TcDogrulaResponse  result = restTemplate.getForObject(REST_URL, TcDogrulaResponse.class);
+        return result;
     }
+
+
 
     @Override
     @Transactional

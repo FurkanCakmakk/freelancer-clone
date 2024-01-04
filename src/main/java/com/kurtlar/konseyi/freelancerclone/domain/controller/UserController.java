@@ -23,10 +23,14 @@ public class UserController extends BaseController {
 
     private final UserService service;
 
-    @PostMapping("/validate")
-    public TcDogrulaResponse validateUser(@RequestBody TcDogrulaRequest tcDogrulaRequest){
-        return service.validateUser(tcDogrulaRequest);
+    @GetMapping("/{TCKimlikNo}/{Ad}/{Soyad}/{DogumYili}")
+    public TcDogrulaResponse validateUser(@PathVariable String TCKimlikNo,
+                                          @PathVariable String Ad,
+                                          @PathVariable String Soyad,
+                                          @PathVariable String DogumYili) {
+        return service.validateUser(TCKimlikNo,  Ad, Soyad,DogumYili);
     }
+
     @PostMapping
     @PreAuthorize("hasRole('SUPER_ADMIN' )")
     public Response<UserResponse> createUser(@RequestBody UserRequest request) {
@@ -45,13 +49,13 @@ public class UserController extends BaseController {
             @RequestParam(value = "pageNumber", defaultValue = Constants.DEFAULT_PAGE_NUMBER, required = false) String pageNumber,
             @RequestParam(value = "pageSize", defaultValue = Constants.DEFAULT_PAGE_SIZE, required = false) String pageSize,
             @RequestParam(value = "sortBy", defaultValue = Constants.DEFAULT_SORT_BY, required = false) String sortBy,
-            @RequestParam(value = "sortDir" , defaultValue = Constants.DEFAULT_SORT_DIRECTION , required = false) String sortDir
+            @RequestParam(value = "sortDir", defaultValue = Constants.DEFAULT_SORT_DIRECTION, required = false) String sortDir
     ) {
-        return respond(service.getAll(pageNumber , pageSize,sortBy , sortDir).map(dto -> UserMapper.toResponse(dto)));
+        return respond(service.getAll(pageNumber, pageSize, sortBy, sortDir).map(dto -> UserMapper.toResponse(dto)));
     }
 
     @GetMapping
-    public Response<DataResponse<UserResponse>> getAllUsers(){
+    public Response<DataResponse<UserResponse>> getAllUsers() {
         return respond(service.getAll().stream().map(UserMapper::toResponse).collect(Collectors.toList()));
     }
 
@@ -65,7 +69,6 @@ public class UserController extends BaseController {
         service.delete(id);
         return new Response<>(MetaResponse.success());
     }
-
 
 
 }

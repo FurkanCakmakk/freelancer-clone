@@ -1,0 +1,19 @@
+syntax = "proto3";
+package com.kurtlar.konseyi.freelancerclone.grpc;
+option java_multiple_files = true;
+
+service TcDogrulaService {
+  rpc getTCKimlikNoDogrula(TcDogrulaRequest) returns (TcDogrulaResponse);
+}
+
+message TcDogrulaRequest {
+  string TCKimlikNo = 1;
+  string Ad = 2;
+  string Soyad = 3;
+  int32 DogumYili = 4;
+}
+
+message TcDogrulaResponse {
+  bool TCKimlikNoDogrulaResult = 1;
+}
+

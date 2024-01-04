@@ -20,7 +20,7 @@ public interface UserService {
 
     Page<UserDto> getAll(String pageNumber, String pageSize , String  sortBy , String sortDir);
 
-    TcDogrulaResponse validateUser(TcDogrulaRequest tcDogrulaRequest);
+    TcDogrulaResponse validateUser(String TCKimlikNo, String Ad, String Soyad, String DogumYili);
 
 
 }
