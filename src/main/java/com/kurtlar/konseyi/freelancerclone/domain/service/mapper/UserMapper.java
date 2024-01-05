@@ -12,6 +12,7 @@ public class UserMapper {
                 .surname(user.getSurname())
                 .email(user.getEmail())
                 .password(user.getPassword())
+                .recipientAddress(user.getRecipientAddress())
                 .build();
     }
 
@@ -21,6 +22,7 @@ public class UserMapper {
         user.setSurname(dto.getSurname());
         user.setEmail(dto.getEmail());
         user.setPassword(dto.getPassword());
+        user.setRecipientAddress(dto.getRecipientAddress());
         return user;
     }
 

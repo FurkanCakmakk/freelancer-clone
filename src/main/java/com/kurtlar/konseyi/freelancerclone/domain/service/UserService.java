@@ -22,5 +22,7 @@ public interface UserService {
 
     TcDogrulaResponse validateUser(String TCKimlikNo, String Ad, String Soyad, String DogumYili);
 
+    String getUserMetamaskAddress (String userId);
+
 
 }

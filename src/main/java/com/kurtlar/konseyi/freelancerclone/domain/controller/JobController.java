@@ -70,7 +70,7 @@ public class JobController extends BaseController {
 
     @PostMapping
     @PreAuthorize("hasAnyRole('ADMIN' , 'SUPER_ADMIN')")
-    public Response<JobResponse> createJob(@Valid @RequestBody JobRequest request) {
+    public Response<JobResponse> createJob(@RequestBody JobRequest request) {
         return respond(JobMapper.toResponse(service.save(JobMapper.toDto(request))));
     }
 

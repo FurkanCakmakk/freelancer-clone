@@ -36,10 +36,18 @@ public class UserServiceImpl implements UserService {
     public TcDogrulaResponse validateUser(String TCKimlikNo, String Ad, String Soyad, String DogumYili) {
         String REST_URL = BASE_URL + "/" + TCKimlikNo + "/" + Ad + "/" + Soyad + "/" + DogumYili;
         System.out.println("REST_URL  : " + REST_URL);
-        TcDogrulaResponse  result = restTemplate.getForObject(REST_URL, TcDogrulaResponse.class);
+        TcDogrulaResponse result = restTemplate.getForObject(REST_URL, TcDogrulaResponse.class);
         return result;
     }
 
+    @Override
+    public String getUserMetamaskAddress(String userId) {
+        User user = repository.findById(userId).orElseThrow(
+                () -> new ResourceNotFoundException(User.class.getSimpleName(), "id", userId)
+        );
+
+        return user.getRecipientAddress();
+    }
 
 
     @Override

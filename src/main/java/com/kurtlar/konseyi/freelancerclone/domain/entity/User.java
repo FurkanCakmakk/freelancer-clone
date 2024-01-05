@@ -25,21 +25,25 @@ public class User extends AbstractEntity {
     private static final String COL_EMAIL = "email";
     private static final String COL_PASSWORD = "password";
     private static final String COL_ROLES = "roles";
+    private static final String COL_RECIPIENT_ADDRESS = "recipient_address";
 
     @Column(name = COL_NAME)
     private String name;
 
-    @Column(name = COL_USERNAME)
+    @Column(name = COL_USERNAME ,  nullable = false , unique = true)
     private String username;
 
     @Column(name = COL_SURNAME)
     private String surname;
 
-    @Column(name = COL_EMAIL)
+    @Column(name = COL_EMAIL , nullable = false , unique = true)
     private String email;
 
     @Column(name = COL_PASSWORD)
     private String password;
+
+    @Column(name = COL_RECIPIENT_ADDRESS)
+    private String recipientAddress;
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(name = "user_roles",

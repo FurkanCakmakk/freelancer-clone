@@ -70,5 +70,10 @@ public class UserController extends BaseController {
         return new Response<>(MetaResponse.success());
     }
 
+    @GetMapping("/get-metamask-address/{userId}")
+    public String getMetamaskAddress(@PathVariable String userId){
+        return service.getUserMetamaskAddress(userId);
+    }
+
 
 }

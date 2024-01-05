@@ -50,6 +50,9 @@ public class SecurityConfig {
                 .authorizeHttpRequests(x -> x.requestMatchers("/auth/**").permitAll())
                 .authorizeHttpRequests(x -> x.requestMatchers("/users/validate").permitAll())
                 .authorizeHttpRequests(x -> x.requestMatchers("/jobs/accept").permitAll())
+                .authorizeHttpRequests(x -> x.requestMatchers("/users/get-metamask-address").permitAll())
+                .authorizeHttpRequests(x -> x.requestMatchers("/jobs").permitAll())
+
 //                .authorizeHttpRequests(x -> x.requestMatchers("/auth/register").permitAll())
 //                .authorizeHttpRequests(x -> x.requestMatchers(HttpMethod.DELETE, "/comments/**").authenticated())
 //                .authorizeHttpRequests(x -> x.requestMatchers(HttpMethod.POST, "/comments/**").authenticated())
