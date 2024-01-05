@@ -3,11 +3,14 @@ package com.kurtlar.konseyi.freelancerclone.domain.service.impl;
 import com.kurtlar.konseyi.freelancerclone.domain.dto.JobDto;
 import com.kurtlar.konseyi.freelancerclone.domain.dto.TechnologyDto;
 import com.kurtlar.konseyi.freelancerclone.domain.entity.Job;
+import com.kurtlar.konseyi.freelancerclone.domain.entity.Offer;
 import com.kurtlar.konseyi.freelancerclone.domain.repository.JobRepository;
 import com.kurtlar.konseyi.freelancerclone.domain.service.JobService;
 import com.kurtlar.konseyi.freelancerclone.domain.service.OfferService;
 import com.kurtlar.konseyi.freelancerclone.domain.service.TechnologyService;
 import com.kurtlar.konseyi.freelancerclone.domain.service.mapper.JobMapper;
+import com.kurtlar.konseyi.freelancerclone.domain.service.mapper.OfferMapper;
+import com.kurtlar.konseyi.freelancerclone.library.enums.JobStatus;
 import com.kurtlar.konseyi.freelancerclone.library.exception.ResourceNotFoundException;
 import com.kurtlar.konseyi.freelancerclone.library.utils.CreatePageable;
 import com.kurtlar.konseyi.freelancerclone.library.utils.CreateSort;
@@ -69,6 +72,19 @@ public class JobServiceImpl implements JobService {
         return repository.findById(jobId).orElseThrow(
                 () -> new ResourceNotFoundException(Job.class.getSimpleName(), "id", jobId)
         );
+    }
+
+    @Override
+    public JobDto acceptOffer(String jobId, String workerId) {
+        Job job = repository.findById(jobId).orElseThrow(
+                () -> new ResourceNotFoundException(Job.class.getSimpleName(), "id", jobId)
+        );
+        job.setWorkerId(workerId);
+        Offer offer = offerService.findByUserIdAndJobId(workerId,jobId);
+
+        offer.setStatus(JobStatus.STATUS_IN_PROGRESS);
+        offerService.update(offer.getId(), OfferMapper.toDto(offer));
+        return JobMapper.toDto(repository.save(job),technologyService,offerService);
     }
 
     @Override

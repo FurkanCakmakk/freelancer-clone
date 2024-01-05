@@ -87,4 +87,9 @@ public class JobController extends BaseController {
         service.delete(id);
         return new Response<>(MetaResponse.success());
     }
+
+    @PutMapping("accept/{jobId}/{workerId}")
+    public Response<JobResponse> acceptOffer(@PathVariable String jobId, @PathVariable String workerId){
+        return respond(JobMapper.toResponse(service.acceptOffer(jobId, workerId)));
+    }
 }

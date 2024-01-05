@@ -17,4 +17,6 @@ public interface JobService {
     Page<JobDto> getAllJobs(String pageNumber, String pageSize , String  sortBy , String sortDir);
 
     Job getEntityById(String jobId);
+
+    JobDto acceptOffer(String jobId, String workerId);
 }

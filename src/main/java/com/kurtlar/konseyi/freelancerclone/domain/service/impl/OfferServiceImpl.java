@@ -67,6 +67,11 @@ public class OfferServiceImpl implements OfferService {
                 .collect(Collectors.toList());
     }
 
+    @Override
+    public Offer findByUserIdAndJobId(String userId, String jobId) {
+        return repository.findByUserIdAndJobId(userId,jobId);
+    }
+
     public Offer setOffer(Offer offer, OfferDto offerDto) {
         offer.setWage(offerDto.getWage());
         offer.setMessage(offerDto.getMessage());
